@@ -15,9 +15,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if(auth()->user()->role !== 'salesperson')
                     <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
                         {{ __('Products') }}
                     </x-nav-link>
+                    @endif
                     <x-nav-link :href="route('sales_orders.index')" :active="request()->routeIs('sales_orders.*')">
                         {{ __('Sales Order') }}
                     </x-nav-link>
