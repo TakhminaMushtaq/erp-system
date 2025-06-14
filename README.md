@@ -120,6 +120,6 @@ Laravel Eloquent
 This project is open-sourced and available under the MIT license.
 
 # Author
-Developed by Takhmeena Mushtaq
+Developed by Takhmina Mushtaq
 
 Feel free to reach out via LinkedIn or GitHub if you want to collaborate or contribute!
