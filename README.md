@@ -7,55 +7,119 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Laravel ERP System
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+A lightweight ERP (Enterprise Resource Planning) system built with Laravel and Bootstrap. This system includes modules for inventory, sales orders, and dashboard analytics, designed for small to mid-scale businesses.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+##  Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+  -  User authentication (Laravel Breeze + Bootstrap)
+  - Product Management (CRUD)
+  - Sales Order Management:
+  - Add multiple products to sales orders
+  - Automatic inventory reduction
+  - Total calculation and validation
+  - PDF export (using DomPDF)
+  - Dashboard Analytics:
+  - Total Sales Amount
+  - Total Orders Count
+  - Low Stock Alerts
+  - Graphs: Daily and Weekly Sales Trends (Chart.js)
+  - Role-based access control (Admin, User)
+  - Clean UI using Bootstrap
+  - Modular and extendable structure
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Folder Structure
+app/
+├── Http/
+│ ├── Controllers/
+│ ├── Middleware/
+│ └── Requests/
+├── Models/
+resources/
+├── views/
+│ ├── products/
+│ ├── sales_orders/
+│ ├── dashboard.blade.php
+routes/
+├── web.php
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation
 
-## Laravel Sponsors
+1. **Clone the repo**
+```bash
+git clone https://github.com/TakhminaMushtaq/erp-system.git
+cd erp-system
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# Install dependencies
 
-### Premium Partners
+composer install
+npm install && npm run build
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# Setup environment
 
-## Contributing
+cp .env.example .env
+php artisan key:generate
+Configure .env
+Update DB credentials, mail, etc.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Run migrations & seeders
 
-## Code of Conduct
+php artisan migrate --seed
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#Start development server
 
-## Security Vulnerabilities
+php artisan serve
+http://127.0.0.1:8000/login
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# User Roles
+admin@example.com / Admin@123 (Admin role - can manage products, view dashboard, etc.)
+salesperson@example.com / Sales@123 (Sales role - can manage sales and view dashboard)
 
-## License
+You can update the default user in database/seeders/UserSeeder.php.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Modules Overview
+Products
+Add, Edit, Delete products
+
+Track stock quantity
+
+SKU, Price, Quantity
+
+Sales Orders
+Create sales with multiple products
+
+Validates stock availability
+
+Auto calculation of total
+
+Stock deducted on order confirmation
+Export to PDF
+
+Dashboard
+Daily and Weekly sales graphs (Chart.js)
+
+Total sales amount
+
+Order count
+
+Low stock alerts (stock < 5)
+
+#Packages Used
+Laravel Breeze (Bootstrap)
+DomPDF
+Chart.js
+Font Awesome
+Laravel Eloquent
+
+# License
+This project is open-sourced and available under the MIT license.
+
+# Author
+Developed by Takhmeena Mushtaq
+
+Feel free to reach out via LinkedIn or GitHub if you want to collaborate or contribute!
