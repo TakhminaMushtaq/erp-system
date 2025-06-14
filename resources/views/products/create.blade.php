@@ -1,27 +1,27 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">
-            {{ __('Add Product') }}
-        </h2>
-    </x-slot>
 
-    <div class="py-6">
-        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 p-6 shadow sm:rounded-lg">
-                <form action="{{ route('products.store') }}" method="POST">
-                    @csrf
-                    @include('products.form')
-                    <div class="mt-4 flex justify-end space-x-2">
-                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                            Save
-                        </button>
-                        <a href="{{ route('products.index') }}"
-                           class="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400">
-                            Cancel
-                        </a>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <form action="{{ route('products.store') }}" method="POST">
+                            @csrf
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addProductModalLabel">Add Product</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                @include('products.form')
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Product</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
-</x-app-layout>
+

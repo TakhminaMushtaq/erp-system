@@ -1,59 +1,94 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+        <h2 class="h4 fw-semibold text-dark">
             {{ __('Products') }}
         </h2>
     </x-slot>
 
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">Product List</h3>
-                <a href="{{ route('products.create') }}"
-                   class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                    Add Product
-                </a>
+    <div class="py-4">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="h5 mb-0">Product List</h3>
+                <!-- Add Product Button -->
+                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                    <i class="fas fa-plus"></i> Product
+                </button>
+                @includeIf('products.create')
             </div>
 
             @if(session('success'))
-                <div class="mb-4 text-green-600 font-semibold">{{ session('success') }}</div>
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
             @endif
 
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg p-4">
-                <table class="min-w-full text-sm">
-                    <thead class="border-b dark:border-gray-600">
-                        <tr>
-                            <th class="px-4 py-2 text-left">Name</th>
-                            <th class="px-4 py-2 text-left">SKU</th>
-                            <th class="px-4 py-2 text-left">Price</th>
-                            <th class="px-4 py-2 text-left">Quantity</th>
-                            <th class="px-4 py-2 text-left">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($products as $product)
-                            <tr class="border-t dark:border-gray-700">
-                                <td class="px-4 py-2">{{ $product->name }}</td>
-                                <td class="px-4 py-2">{{ $product->sku }}</td>
-                                <td class="px-4 py-2">₹{{ number_format($product->price, 2) }}</td>
-                                <td class="px-4 py-2">{{ $product->quantity }}</td>
-                                <td class="px-4 py-2 space-x-2">
-                                    <a href="{{ route('products.edit', $product) }}"
-                                       class="text-yellow-600 hover:underline">Edit</a>
-                                    <form action="{{ route('products.destroy', $product) }}"
-                                          method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button onclick="return confirm('Delete this product?')"
-                                                class="text-red-600 hover:underline">Delete</button>
-                                    </form>
-                                </td>
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <table class="table table-bordered table-striped table-hover table-sm align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>SKU</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Actions</th>
                             </tr>
-                        @empty
-                            <tr><td colspan="5" class="px-4 py-4 text-gray-500">No products found.</td></tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @forelse($products as $product)
+                                <tr>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->sku }}</td>
+                                    <td>₹{{ number_format($product->price, 2) }}</td>
+                                    <td>{{ $product->quantity }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editProductModal{{ $product->id }}">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <!-- Delete Button Trigger (place this inside your table or action buttons) -->
+                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteProductModal{{ $product->id }}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+
+                                        <!-- Delete Confirmation Modal -->
+                                        <div class="modal fade" id="deleteProductModal{{ $product->id }}" tabindex="-1" aria-labelledby="deleteProductModalLabel{{ $product->id }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-danger text-white">
+                                                        <h5 class="modal-title" id="deleteProductModalLabel{{ $product->id }}">Confirm Delete</h5>
+                                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        Are you sure you want to delete the product <strong>{{ $product->name }}</strong>?
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <form action="{{ route('products.destroy', $product) }}" method="POST" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">
+                                                                <i class="fas fa-trash"></i> Yes, Delete
+                                                            </button>
+                                                        </form>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @includeIf('products.edit')
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">No products found.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

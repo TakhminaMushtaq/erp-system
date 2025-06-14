@@ -1,29 +1,45 @@
-<div class="space-y-4">
-    <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
-        <input type="text" name="name" value="{{ old('name', $product->name ?? '') }}"
-               class="mt-1 block w-full rounded-md shadow-sm dark:bg-gray-700 dark:text-white">
-        @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+<div class="row g-3">
+    <div class="col-md-6">
+        <label for="name" class="form-label">Product Name</label>
+        <input type="text" name="name" id="name"
+               value="{{ old('name', $product->name ?? '') }}"
+               class="form-control @error('name') is-invalid @enderror"
+               placeholder="Enter product name">
+        @error('name')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
     </div>
 
-    <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">SKU</label>
-        <input type="text" name="sku" value="{{ old('sku', $product->sku ?? '') }}"
-               class="mt-1 block w-full rounded-md shadow-sm dark:bg-gray-700 dark:text-white">
-        @error('sku') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    <div class="col-md-6">
+        <label for="sku" class="form-label">SKU</label>
+        <input type="text" name="sku" id="sku"
+               value="{{ old('sku', $product->sku ?? '') }}"
+               class="form-control @error('sku') is-invalid @enderror"
+               placeholder="Enter SKU">
+        @error('sku')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
     </div>
 
-    <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Price</label>
-        <input type="number" step="0.01" name="price" value="{{ old('price', $product->price ?? '') }}"
-               class="mt-1 block w-full rounded-md shadow-sm dark:bg-gray-700 dark:text-white">
-        @error('price') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    <div class="col-md-6">
+        <label for="price" class="form-label">Price (₹)</label>
+        <input type="number" step="0.01" name="price" id="price"
+               value="{{ old('price', $product->price ?? '') }}"
+               class="form-control @error('price') is-invalid @enderror"
+               placeholder="Enter price">
+        @error('price')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
     </div>
 
-    <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Quantity</label>
-        <input type="number" name="quantity" value="{{ old('quantity', $product->quantity ?? '') }}"
-               class="mt-1 block w-full rounded-md shadow-sm dark:bg-gray-700 dark:text-white">
-        @error('quantity') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    <div class="col-md-6">
+        <label for="quantity" class="form-label">Quantity</label>
+        <input type="number" name="quantity" id="quantity"
+               value="{{ old('quantity', $product->quantity ?? '') }}"
+               class="form-control @error('quantity') is-invalid @enderror"
+               placeholder="Enter quantity">
+        @error('quantity')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
     </div>
 </div>

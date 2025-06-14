@@ -1,28 +1,28 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">
-            {{ __('Edit Product') }}
-        </h2>
-    </x-slot>
+<!-- Modal -->
+<div class="modal fade" id="editProductModal{{ $product->id }}" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
 
-    <div class="py-6">
-        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 p-6 shadow sm:rounded-lg">
-                <form action="{{ route('products.update', $product) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    @include('products.form')
-                    <div class="mt-4 flex justify-end space-x-2">
-                        <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-                            Update
-                        </button>
-                        <a href="{{ route('products.index') }}"
-                           class="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400">
-                            Cancel
-                        </a>
-                    </div>
-                </form>
-            </div>
+      <form action="{{ route('products.update', $product) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="modal-body">
+            @include('products.form')
         </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">
+              <i class="fas fa-edit"></i> Update
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancel
+          </button>
+        </div>
+      </form>
     </div>
-</x-app-layout>
+  </div>
+</div>
