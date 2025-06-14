@@ -84,8 +84,6 @@ You can update the default user in database/seeders/UserSeeder.php.
 
 # Modules Overview
 Products
-![image](https://github.com/user-attachments/assets/daa1ebec-e5ff-4d16-b264-475a24b9625d)
-
 Add, Edit, Delete products
 
 Track stock quantity
@@ -109,8 +107,7 @@ Total sales amount
 
 Order count
 
-Low stock alerts (stock < 10)
-![image](https://github.com/user-attachments/assets/937d8dca-9148-4c27-8b9f-876b398565ee)
+Low stock alerts (stock < 5)
 
 #Packages Used
 Laravel Breeze (Bootstrap)
